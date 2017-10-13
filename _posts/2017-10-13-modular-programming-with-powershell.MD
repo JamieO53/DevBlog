@@ -1,8 +1,5 @@
 ---
-layout: developer-post
-title: Modular Programming with PowerShell
-meta: Good modular programming organizes functions so that things that belong together go together
-category: methodology
+layout: post
 ---
 
 ## Coupling and Cohesion

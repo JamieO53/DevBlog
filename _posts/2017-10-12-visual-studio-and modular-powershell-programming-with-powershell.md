@@ -1,8 +1,5 @@
 ---
-layout: developer-post
-title: Visual Studio and Modular PowerShell Programming
-meta: PowerShell embraces modules, but Visual Studio PowerShell projects give poor support for modular programming
-category: powershell
+layout: post
 ---
 ## What Visual Studio Does
 
