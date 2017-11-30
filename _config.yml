@@ -15,7 +15,7 @@
 # in the templates via {{ site.myvariable }}.
 lang: en-ZA
 title: Jamie's Developer Blog
-email: jamieoglethorpe@gmail.com
+email: #jamieoglethorpe@gmail.com
 description: What I do and why I do it
 baseurl: "/DevBlog"
 url: "https://jamieo53.github.io"
@@ -29,7 +29,7 @@ logo: "/assets/images/logo.png"
 
 # Build settings
 markdown: kramdown
-theme: jekyll-theme-basically-basic
+# theme: jekyll-theme-basically-basic
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
