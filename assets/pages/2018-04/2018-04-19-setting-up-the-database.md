@@ -1,23 +1,7 @@
 ---
 layout: post
 ---
-# Using Visual Studio Database projects to Re-engineer a SQL Server database
-
-I have often struggled with complex monolithic corporate databases. They are hard to understand because everything is thrown together and mixed up. I always get to the point where I wish that the database could be divided up into cohesive modules, where everything in a module belongs together.
-
-Well, Microsoft's [SQL Server Data Tools (SSDT)](https://www.visualstudio.com/vs/features/ssdt/) makes this possible. The essential feature is the [Visual Studio Database Project](https://msdn.microsoft.com/en-us/library/hh272702(v=vs.103).aspx).
-
-For illustration, I looked around GigHub and Sourceforge for fairly old projects using SQL Server. I found [OpenMiracle](https://sourceforge.net/projects/openmiracle/) which has a nice mix of features. I found the fact that it was SQL Server 2005 database and that there have not been any recent commits appealing. This is the sort of system I have had to work on. I will use it to illustrate my posts.
-
-I do not intend to contribute to OpenMiracle at present, so my examples must not be assumed to be production quality. For example, I have no interest in getting security roles and logins to work.
-
-I cloned the code to my [GitHub repository](https://github.com/JamieO53/OpenMiracle). I will be adding my examples to this project.
-
-At present I have three things I want to achieve in this devblog:
-
-1. I want to show how SSDT can be used to break a monolithic database into cohesive modules.
-2. I want to show how NuGet can be used to achieve database module reuse.
-3. I want to show how I built the NuGet DB reuse framework using PowerShell.
+# Setting up the Database
 
 ## Creating the database project
 
@@ -35,7 +19,17 @@ I use the project's Schema Compare action to script the objects in the database.
 
 As with any legacy database, this one is full of junk. A fabulous feature of SSDT projects is the validation. You don't need to create the database to find errors, and SSDT is much more thorough.
 
-We have a look at the Error List![Error List](..\assets\images\posts\2018-04\Error-List-01.PNG)
+I work systematically through the errors and warnings. There are two kinds of warnings:
+
+* Missing objects
+
+    Almost all of these are the result of debris left by developers as they work, and don't clean up after following false paths.
+
+* Case differences in identifiers
+
+    These are not worth the trouble to fix
+
+I have a look at the Error List![Error List](../../images/posts/2018-04/Error-List-01.PNG)
 
 The easiest issue to deal with is the missing `open` login. I create that in the new Security folder. I rename the file open_1.sql to open_login.sql
 
@@ -58,7 +52,7 @@ I look at the first warning referring to Function1. This is an obvious error, so
 
 The next batch of warnings are all for SQL71502, that is an unresolved reference to an object.
 
-![SQL71502 warnings](..\assets\images\posts\2018-04\SQL71502-warnings.png)
+![SQL71502 warnings](../../images/posts/2018-04/SQL71502-warnings.png)
  Most of these refer to missing tables, in this case `tbl_ProductBatch`
 
  ```SQL
@@ -112,7 +106,7 @@ CREATE PROCEDURE  [dbo].[CustomerCheckreferenceAndDelete]
 The `tbl_SalaryVoucherMaster` table does not exist, so I delete that line
 
 There is a false positive which needs to be allowed for:
-![False positive warning](..\assets\images\posts\2018-04\False-Positive-warning.png)
+![False positive warning](../../images/posts/2018-04/False-Positive-warning.png)
 
 This procedure contains this complicated query
 
@@ -149,7 +143,7 @@ The warnings refer to the unqualified identifiers in the subquery
 
 T-SQL is perfectly happy with this, so I suppress the warning on the procedure:
 
-![Suppress warning on script](..\assets\images\posts\2018-04\Suppress-False-Positive-warning.png)
+![Suppress warning on script](../../images/posts/2018-04/Suppress-False-Positive-warning.png)
 
 Once all the warnings were dealt with, I did a *Rebuild All* of th project, and got a list of `SQL71558` warnings of differences in case. I suppressed these in the project's Properties Build page:
-![Suppress warning](..\assets\images\posts\2018-04\Suppress-Case-Warnings.png)
+![Suppress warning](../../images/posts/2018-04/Suppress-Case-Warnings.png)
