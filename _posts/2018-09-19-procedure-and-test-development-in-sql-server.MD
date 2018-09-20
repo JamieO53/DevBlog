@@ -117,14 +117,14 @@ Note that I have temporarily replaced the declaration of `@partnerID` with a `SE
 When we execute the script, we get the following output:
 
 partnerID | partner | enabled | dateEnabledChanged
-- | - | - | -
+-|-|-|-
 12 | BillingEvent:TEST | 1 | 2018-09-19 13:28:40.657
 
 group | partnerID
-- | -
+-|-
 
  context | aliasID | alias | partnerID
-- | - | - | -
+-|-|-|-
 
 Later we will automate the test by comparing the result with our expectation. Now will be a good time to tidy up the queries to show only the values we want to compare:
 
@@ -154,7 +154,7 @@ yielding
  | - | 
 
  |  context | aliasID | alias  | 
- | - | - | - | 
+ | -|-|- | 
 
 #### Partner Group
 
@@ -175,7 +175,7 @@ yielding
  | BillingEvent | 
 
  |  context | aliasID | alias  | 
- | - | - | - | 
+ | -|-|- | 
 
 #### Partner Maps
 
@@ -196,7 +196,7 @@ and get
  | BillingEvent | 
 
  |  context | aliasID | alias  | 
- | - | - | - | 
+ | -|-|- | 
 BillingEvent:Service | TEST | TEST
 
 Looking good! We add the remaining partner maps and get
@@ -210,7 +210,7 @@ Looking good! We add the remaining partner maps and get
  | BillingEvent | 
 
  |  context | aliasID | alias  | 
- | - | - | - | 
+ | -|-|- | 
 BillingEvent:Company | TST | TST
 BillingEvent:CoPartner | Ecs | Ecs
 BillingEvent:PartnerCategory | StoreCode | StoreCode
@@ -351,7 +351,7 @@ Running the script yields
  | BillingEvent | 
 
  |  context | aliasID | alias  | 
- | - | - | - | 
+ | -|-|- | 
 BillingEvent:Company | TST | TST
 BillingEvent:CoPartner | Ecs | Ecs
 BillingEvent:PartnerCategory | StoreCode | StoreCode
