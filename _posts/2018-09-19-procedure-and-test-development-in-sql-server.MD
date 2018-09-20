@@ -122,9 +122,11 @@ When we execute the script, we get the following output:
 
 | group | partnerID |
 |-|-|
+| | |
 
 | context | aliasID | alias | partnerID |
 |-|-|-|-|
+| | | | |
 
 Later we will automate the test by comparing the result with our expectation. Now will be a good time to tidy up the queries to show only the values we want to compare:
 
@@ -152,9 +154,11 @@ yielding
 
 | partnerGroup |
 |-|
+| |
 
 | context | aliasID | alias |
 |-|-|-|
+| | | |
 
 #### Partner Group
 
@@ -176,6 +180,7 @@ yielding
 
 | context | aliasID | alias |
 |-|-|-|
+| | | |
 
 #### Partner Maps
 
@@ -197,7 +202,7 @@ and get
 
 | context | aliasID | alias |
 |-|-|-|
-| BillingEvent:Service | TEST | TEST
+| BillingEvent:Service | TEST | TEST |
 
 Looking good! We add the remaining partner maps and get
 
