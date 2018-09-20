@@ -116,15 +116,15 @@ Note that I have temporarily replaced the declaration of `@partnerID` with a `SE
 
 When we execute the script, we get the following output:
 
-partnerID | partner | enabled | dateEnabledChanged
--|-|-|-
-12 | BillingEvent:TEST | 1 | 2018-09-19 13:28:40.657
+| partnerID | partner | enabled | dateEnabledChanged
+|-|-|-|-
+| 12 | BillingEvent:TEST | 1 | 2018-09-19 13:28:40.657
 
-group | partnerID
--|-
+| group | partnerID
+|-|-
 
- context | aliasID | alias | partnerID
--|-|-|-
+| context | aliasID | alias | partnerID
+|-|-|-|-
 
 Later we will automate the test by comparing the result with our expectation. Now will be a good time to tidy up the queries to show only the values we want to compare:
 
@@ -146,15 +146,15 @@ ORDER BY context
 
 yielding
 
- |  partner  | 
- | - | 
- |  BillingEvent:TEST  | 
+| partner |
+|-| 
+| BillingEvent:TEST |
 
- |  partnerGroup  | 
- | - | 
+| partnerGroup |
+|-| 
 
- |  context | aliasID | alias  | 
- | -|-|- | 
+| context | aliasID | alias |
+|-|-|-| 
 
 #### Partner Group
 
@@ -166,16 +166,16 @@ EXEC    AddPartnerGroup @partnerID = @partnerID, @group = 'BillingEvent'
 
 yielding
 
- |  partner  | 
- | - | 
- |  BillingEvent:TEST  | 
+| partner |
+|-| 
+| BillingEvent:TEST |
 
- |  partnerGroup  | 
- | - | 
- | BillingEvent | 
+| partnerGroup |
+|-| 
+| BillingEvent |
 
- |  context | aliasID | alias  | 
- | -|-|- | 
+| context | aliasID | alias |
+|-|-|-| 
 
 #### Partner Maps
 
@@ -187,34 +187,34 @@ EXEC    AddPartnerMap @context = 'BillingEvent:Service', @aliasID = @service, @a
 
 and get
 
- |  partner  | 
- | - | 
- |  BillingEvent:TEST  | 
+| partner |
+|-| 
+| BillingEvent:TEST |
 
- |  partnerGroup  | 
- | - | 
- | BillingEvent | 
+| partnerGroup |
+|-| 
+| BillingEvent |
 
- |  context | aliasID | alias  | 
- | -|-|- | 
-BillingEvent:Service | TEST | TEST
+| context | aliasID | alias |
+|-|-|-| 
+| BillingEvent:Service | TEST | TEST
 
 Looking good! We add the remaining partner maps and get
 
- |  partner  | 
- | - | 
- |  BillingEvent:TEST  | 
+| partner |
+|-| 
+| BillingEvent:TEST |
 
- |  partnerGroup  | 
- | - | 
- | BillingEvent | 
+| partnerGroup |
+|-| 
+| BillingEvent |
 
- |  context | aliasID | alias  | 
- | -|-|- | 
-BillingEvent:Company | TST | TST
-BillingEvent:CoPartner | Ecs | Ecs
-BillingEvent:PartnerCategory | StoreCode | StoreCode
-BillingEvent:Service | TEST | TEST
+| context | aliasID | alias |
+|-|-|-| 
+| BillingEvent:Company | TST | TST |
+| BillingEvent:CoPartner | Ecs | Ecs |
+| BillingEvent:PartnerCategory | StoreCode | StoreCode |
+| BillingEvent:Service | TEST | TEST |
 
 ### The test script
 
@@ -342,19 +342,19 @@ EXEC    AddPartnerMap @context = 'BillingEvent:PartnerCategory', @aliasID = @par
 
 Running the script yields
 
- |  partner  | 
- | - | 
- |  BillingEvent:TEST  | 
+| partner |
+|-| 
+| BillingEvent:TEST |
 
- |  partnerGroup  | 
- | - | 
- | BillingEvent | 
+| partnerGroup |
+|-| 
+| BillingEvent |
 
- |  context | aliasID | alias  | 
- | -|-|- | 
-BillingEvent:Company | TST | TST
-BillingEvent:CoPartner | Ecs | Ecs
-BillingEvent:PartnerCategory | StoreCode | StoreCode
-BillingEvent:Service | TEST | TEST
+| context | aliasID | alias |
+|-|-|-| 
+| BillingEvent:Company | TST | TST |
+| BillingEvent:CoPartner | Ecs | Ecs |
+| BillingEvent:PartnerCategory | StoreCode | StoreCode |
+| BillingEvent:Service | TEST | TEST |
 
 which hits the nail on the head!
